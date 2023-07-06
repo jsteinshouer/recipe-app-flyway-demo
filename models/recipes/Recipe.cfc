@@ -15,6 +15,7 @@ component output="false"  accessors="true" extends="models.BaseEntity" {
 	property name="ingredients" type="string";
 	property name="directions" type="string";
 	property name="user" type="any";
+	property name="isPublic" type="boolean" default="false";
 
 	/**
 	* Constructor
@@ -26,6 +27,7 @@ component output="false"  accessors="true" extends="models.BaseEntity" {
 	* @description.hint Recipe description
 	* @directions.hint Receipe directions
 	* @user.hint users.User Recipe owner
+	* @isPublic.hint Is the recipe public (Meaning anyone can view it)
 	*/
 	public function init(
 		recipeID = 0,
@@ -33,7 +35,8 @@ component output="false"  accessors="true" extends="models.BaseEntity" {
 		description = "",
 		ingredients = "",
 		directions = "",
-		user
+		user,
+		isPublic = false
 	){
 		setRecipeID(arguments.recipeID);
 		setTitle(arguments.title);
@@ -41,6 +44,7 @@ component output="false"  accessors="true" extends="models.BaseEntity" {
 		setIngredients(arguments.ingredients);
 		setDirections(arguments.directions);
 		setUser(arguments.user);
+		setIsPublic(arguments.isPublic);
 
 
 		return this;

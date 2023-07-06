@@ -22,7 +22,8 @@
         <a class="navbar-brand" href="/">Recipe Box</a>
         <cfif prc.isLoggedIn>
 			<ul class="nav navbar-nav pull-right">
-				<li><a href="#event.buildLink("recipes")#">Recipes</a></li>
+				<li><a href="#event.buildLink("recipes.public")#">Public Recipes</a></li>
+				<li><a href="#event.buildLink("recipes")#">My Recipes</a></li>
 				<li class="dropdown">
 				<a href="##" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> <span class="caret"></span></a>
 				<ul class="dropdown-menu">

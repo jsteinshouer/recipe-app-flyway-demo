@@ -12,6 +12,7 @@ component extends="coldbox.system.EventHandler" {
 	any function preHandler( event, rc, prc ) {
 		prc.user = securityService.getLoggedInUser();
 	}
+
 	/**
 	* Index
 	*/
@@ -20,11 +21,22 @@ component extends="coldbox.system.EventHandler" {
 	}
 
 	/**
+	* list public recipes
+	*/
+	any function public( event, rc, prc ) {
+		prc.recipes = recipeService.getPublic();
+	}
+
+	/**
 	* show
 	*/
 	any function show( event, rc, prc ){
-
+		
 		prc.recipe = recipeService.get(rc.id);
+		prc.canEdit = false;
+		if ( prc.recipe.getUser().getUserId() == securityService.getLoggedInUser().getUserID() ) {
+			prc.canEdit = true;
+		}
 			
 		event.setView("recipes/show");
 	}
@@ -35,6 +47,10 @@ component extends="coldbox.system.EventHandler" {
 	any function edit( event, rc, prc ){
 
 		prc.recipe = recipeService.get(rc.id);
+
+		if ( prc.recipe.getUser().getUserId() != securityService.getLoggedInUser().getUserID() ) {
+			relocate("recipes");
+		}
 		
 		event.setView("recipes/form");
 	}
@@ -55,11 +71,16 @@ component extends="coldbox.system.EventHandler" {
 	any function save( event, rc, prc ){
 
 		event.paramValue("id",0);
+		event.paramValue("isPublic",false);
+
 		var recipe = populateModel(recipeService.get(rc.id));
 
 		if (recipe.getUser().getUserId() == 0) {
 			var user = securityService.getLoggedInUser();
 			recipe.setUser(user);
+		}
+		else if ( recipe.getUser().getUserId() != securityService.getLoggedInUser().getUserID() ) {
+			throw("Unauthorized access");
 		}
 
 		recipeService.save(recipe);
@@ -73,6 +94,11 @@ component extends="coldbox.system.EventHandler" {
 	any function delete( event, rc, prc ){
 
 		var recipe = recipeService.get(rc.id);
+
+		if ( recipe.getUser().getUserId() != securityService.getLoggedInUser().getUserID() ) {
+			throw("Unauthorized access");
+		}
+
 		recipeService.delete(recipe);
 		
 		relocate("recipes");

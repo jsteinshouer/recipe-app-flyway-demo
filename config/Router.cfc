@@ -26,6 +26,9 @@ component {
         route(pattern="recipes/new")
             .withAction("new")
             .toHandler("recipes");
+        route(pattern="recipes/public")
+            .withAction("public")
+            .toHandler("recipes");
         route(pattern="recipes/:id/:action")
             .toHandler("recipes");
         route(pattern="recipes/:id")

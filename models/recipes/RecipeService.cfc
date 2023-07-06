@@ -30,10 +30,13 @@ component output="false" displayname="RecipeService"  {
 	}
 
 
-	public any function getByUserID( required numeric userID ) {
+	public array function getByUserID( required numeric userID ) {
 		return recipeGateway.getByUserID( arguments.userID );
 	}
 
+	public array function getPublic() {
+		return recipeGateway.getPublic();
+	}
 
 	public any function save(recipe) {
 

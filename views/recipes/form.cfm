@@ -17,6 +17,13 @@
     <label for="directions">Directions</label>
     <textarea name="directions" class="form-control" rows="7" required>#prc.recipe.getDirections()#</textarea>
   </div>
+  <div class="form-group">
+     <div class="checkbox">
+      <label>
+        <input type="checkbox" name="isPublic" value="true" <cfif prc.recipe.getIsPublic()>checked</cfif> > Public
+      </label>
+    </div>
+  </div>
  <!---  <div class="form-group">
     <label for="tags">Tags</label>
     <tags-input ng-model="recipe.tags"></tags-input>
