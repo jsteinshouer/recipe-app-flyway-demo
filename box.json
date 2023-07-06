@@ -1,0 +1,37 @@
+{
+    "name":"Recipe Box",
+    "author":"Jason Steinshouer",
+    "shortDescription":"Recipe demo app",
+    "private":true,
+    "dependencies":{
+        "coldbox":"7",
+        "cbstorages":"3.0.1",
+        "BCrypt":"3.1.0",
+        "nbvcxz-1.5.1":"jar:https://github.com/GoSimpleLLC/nbvcxz/releases/download/1.5.1/nbvcxz-1.5.1.jar",
+        "testbox":"^2.7.0+167",
+        "core-3.5.1":"jar:https://repo1.maven.org/maven2/com/google/zxing/core/3.5.1/core-3.5.1.jar",
+        "javase-3.5.1":"jar:https://repo1.maven.org/maven2/com/google/zxing/javase/3.5.1/javase-3.5.1.jar",
+        "flyway-core-9.20.0":"jar:https://repo1.maven.org/maven2/org/flywaydb/flyway-core/9.20.0/flyway-core-9.20.0.jar",
+        "flyway-sqlserver-9.20.0":"jar:https://repo1.maven.org/maven2/org/flywaydb/flyway-sqlserver/9.20.0/flyway-sqlserver-9.20.0.jar"
+    },
+    "devDependencies":{},
+    "installPaths":{
+        "coldbox":"coldbox/",
+        "cbstorages":"modules/cbstorages/",
+        "BCrypt":"modules/BCrypt/",
+        "nbvcxz-1.5.1":"lib/nbvcxz/",
+        "testbox":"testbox/",
+        "core-3.5.1":"lib/zxing/core-3.5.1/",
+        "javase-3.5.1":"lib/zxing/javase-3.5.1/",
+        "flyway-core-9.20.0":"lib/flyway-core-9.20.0/",
+        "flyway-sqlserver-9.20.0":"lib/flyway-sqlserver-9.20.0/"
+    },
+    "scripts": {
+        "onServerInitialInstall": "cfpm install debugger,sqlserver"
+    },
+    "ignore":[
+        "**/.*",
+        "test",
+        "tests"
+    ]
+}

@@ -1,0 +1,7 @@
+
+placeholder.environment=development
+flyway.cleanDisabled=false
+flyway.locations=filesystem:./db/migration,filesystem:./db/seeds
+flyway.url=jdbc:sqlserver://localhost:1433;databaseName=${DB_NAME};encrypt=false
+flyway.user=
+flyway.password=
