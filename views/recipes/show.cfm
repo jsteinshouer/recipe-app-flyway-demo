@@ -19,7 +19,13 @@
     <h5><strong>Directions</strong></h5>
     <pre>#prc.recipe.getDirections()#</pre>
   </div>
-	<a class="btn btn-default btn-lg" href="#event.buildLink("recipes.#prc.recipe.getRecipeId()#.edit")#">Edit</a>
+  <div>
+    <h5><strong>Public:</strong> #yesNoFormat(prc.recipe.getIsPublic())#</h5>
+
+  </div>
+  <cfif prc.canEdit>
+	  <a class="btn btn-default btn-lg" href="#event.buildLink("recipes.#prc.recipe.getRecipeId()#.edit")#">Edit</a>
+  </cfif>
 </div>
 
 </cfoutput>

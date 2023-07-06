@@ -22,7 +22,8 @@ component output="false" displayname="ReceipeGateway"  {
 					description,
 					ingredients,
 					directions,
-					user_id
+					user_id,
+					is_public
 				FROM recipe
 				WHERE user_id = :userID
 			";
@@ -43,15 +44,49 @@ component output="false" displayname="ReceipeGateway"  {
 				recipe.setIngredients(item.ingredients);
 				recipe.setDirections(item.directions);
 				recipe.setUser(userService.get(item.user_id));
+				recipe.setIsPublic(item.is_public);
 				recipes.append(recipe);
 			}
 		}
 		
 		return recipes;
 	}
-	
-	
-	
-	
+
+	public any function getPublic() {
+
+		var recipes = [];
+
+		var sql = "
+				SELECT 
+					recipe_id,
+					title,
+					description,
+					ingredients,
+					directions,
+					user_id,
+					is_public
+				FROM recipe
+				WHERE is_public = 1
+			";
+
+		var q = queryExecute(sql);
+
+		if (q.recordCount) {
+
+			for (var item in q) {
+				var recipe = beanFactory.getInstance("recipes.Recipe");
+				recipe.setRecipeId(item.recipe_id);
+				recipe.setTitle(item.title);
+				recipe.setDescription(item.description);
+				recipe.setIngredients(item.ingredients);
+				recipe.setDirections(item.directions);
+				recipe.setUser(userService.get(item.user_id));
+				recipe.setIsPublic(item.is_public);
+				recipes.append(recipe);
+			}
+		}
+		
+		return recipes;
+	}
 	
 }

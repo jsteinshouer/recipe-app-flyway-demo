@@ -14,7 +14,14 @@ component output="false" displayname=""  {
 
 		var q = queryExecute(
 			"
-				SELECT *
+				SELECT 
+					recipe_id,
+					title,
+					description,
+					ingredients,
+					directions,
+					user_id,
+					is_public
 				FROM recipe
 				WHERE 
 					recipe_id = :recipeId
@@ -30,6 +37,7 @@ component output="false" displayname=""  {
 			recipe.setIngredients(q.ingredients);
 			recipe.setDirections(q.directions);
 			recipe.setUser(userService.get(q.user_id));
+			recipe.setIsPublic(q.is_public);
 		}
 		
 		return recipe;
@@ -44,14 +52,16 @@ component output="false" displayname=""  {
 					description,
 					ingredients,
 					directions,
-					user_id
+					user_id,
+					is_public
 				)
 				VALUES (
 					:title,
 					:description,
 					:ingredients,
 					:directions,
-					:userId
+					:userId,
+					:isPublic
 				);
 			",
 			{
@@ -59,7 +69,8 @@ component output="false" displayname=""  {
 				description = recipe.getDescription(),
 				ingredients = recipe.getIngredients(),
 				directions = recipe.getDirections(),
-				userId = recipe.getUser().getUserId()
+				userId = recipe.getUser().getUserId(),
+				isPublic = recipe.getIsPublic()
 			},
 			{
 				result = "q"
@@ -83,7 +94,8 @@ component output="false" displayname=""  {
 					description = :description,
 					ingredients = :ingredients,
 					directions = :directions,
-					user_id = :userId
+					user_id = :userId,
+					is_public = :isPublic
 				WHERE
 					recipe_id = :recipeId
 			",
@@ -93,7 +105,8 @@ component output="false" displayname=""  {
 				description = recipe.getDescription(),
 				ingredients = recipe.getIngredients(),
 				directions = recipe.getDirections(),
-				userId = recipe.getUser().getUserId()
+				userId = recipe.getUser().getUserId(),
+				isPublic = recipe.getIsPublic()
 			}
 		);
 		
